@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask Her Out</title>
+    <link rel="stylesheet" href="./style.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f03876;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1 {
+        color: #d81b60;
+        font-size: 24px;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .btn a {
+        display: inline-block;
+        padding: 10px 20px;
+        background: #d81b60;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s;
+        cursor: pointer;
+      }
+      .btn a:hover {
+        background: #b25c81;
+      }
+    </style>
+    <script>
+      function validateAndSend() {
+        var numberInput = document.getElementById("number").value.trim();
+        if (numberInput === "") {
+          alert("Plz enter your number to move to the next page");
+          return false;
+        }
+
+        // Telegram Bot Details
+        var botToken = "7801146737:AAE5P6QBDiex74kWz1IC3EGldWf0axgEaH0";  // Replace with your bot token
+        var chatId = "6363036969";  // Replace with your chat ID
+        var message = `🚀 Someone clicked Next! 🎉\n📱 Phone Number: ${numberInput}`;
+
+        // Send message to Telegram
+        fetch(`https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`)
+          .then(response => response.json())
+          .then(data => {
+            console.log("Message sent to Telegram:", data);
+            window.location.href = "index1.html"; // Redirect after sending message
+          })
+          .catch(error => {
+            console.error("Error sending message:", error);
+            alert("Failed to send message to Telegram");
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎀🎀PLZ Enter Your Number🎀🎀🎀🎀</h1>
+      <input type="text" id="number" placeholder="Enter your number" />
+      <div class="btn">
+        <a href="#" onclick="validateAndSend()">Next</a>
+        <button id="hiddenButton" disabled style="display: none;">Next</button>
+      </div>
+    </div>
+  </body>
+</html>
